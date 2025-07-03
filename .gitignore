@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+
+# Node
+node_modules/
+dist/
+
+# Logs
+*.log
+
+# Vite
+.vite/
+
+# Docker
+*.pid
+*.sock
+db_data/
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/
+
+# Python virtual environments
+venv/
