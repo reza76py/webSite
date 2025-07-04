@@ -1,35 +1,29 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import axios from 'axios'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [name, setName] = useState('')
+  const [text, setText] = useState('')
+  const [response, setResponse] = useState('')
+
+  const handleSubmit = async () => {
+    try {
+      const res = await axios.post('http://localhost:8000/api/message/', { name, text })
+      setResponse(res.data.message)
+    } catch (err) {
+      console.error(err)
+      setResponse('Error saving message.')
+    }
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1 className="text-4xl font-bold text-red-600">FEeeee</h1>
-
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="p-8 text-black bg-gray-100 min-h-screen">
+      <h1 className="text-2xl font-bold mb-4">Send a Message</h1>
+      <input className="block p-2 mb-2 text-black" placeholder="Your name" value={name} onChange={e => setName(e.target.value)} />
+      <textarea className="block p-2 mb-2 text-black" placeholder="Your message" value={text} onChange={e => setText(e.target.value)} />
+      <button className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded" onClick={handleSubmit}>Send</button>
+      <p className="mt-4">{response}</p>
+    </div>
   )
 }
 

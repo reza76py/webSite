@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import HelloAPIView
+from .views import MessageView
 
 urlpatterns = [
-    path('hello/', HelloAPIView.as_view(), name='hello'),
+    path('api/message/', MessageView.as_view(), name='post-message'),
 ]
